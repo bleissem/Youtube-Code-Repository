@@ -18,9 +18,12 @@ if __name__ == '__main__':
         done = False
         score = 0
         observation = env.reset()
+        if (len(observation) > 1):
+            observation = observation[0]
+
         while not done:
             action = agent.choose_action(observation)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, done, info, dontknow = env.step(action)
             agent.store_transition(observation, action, reward)
             observation = observation_
             score += reward

@@ -36,11 +36,11 @@ class Agent(object):
 
             return K.sum(-log_lik*advantages)
 
-        policy = Model(input=[input, advantages], output=[probs])
+        policy = Model([input, advantages], [probs])
 
         policy.compile(optimizer=Adam(lr=self.lr), loss=custom_loss)
 
-        predict = Model(input=[input], output=[probs])
+        predict = Model([input], [probs])
 
         return policy, predict
 
